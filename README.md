@@ -23,6 +23,7 @@ Per ogni strategia è stata creata una funzione dedicata, atta a rispettare le c
 
 
 Per tutte e quattro le strategie si è scelto di partire dalla matrice `rank_matrix` (4000X400) che prende come righe i clienti (guest), come colonne gli hotel e come valori le preferenze (priority) dei clienti per ogni hotel. Alla fine della funzione ognuna delle quattro strategie dovrà restituire una `choice_matrix` di dimensioni uguali alla `rank_matrix`, ma con valori binari {0,1}, dove 1 rappresenta una camera occupata da un cliente. La `choice_matrix` verrà infine fatta passare attraverso la funzione *results* in modo da ottenere per ogni strategia:
+
   * il numero di clienti sistemati
   * il numero di stanze occupate
   * il numero di hotel diversi occupati
