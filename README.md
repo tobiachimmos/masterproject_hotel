@@ -41,12 +41,10 @@ Dopo l'import dei dati:
 `rank_matrix`: dai dati in *preferences.xlsx*, viene creato una matrice dove su ogni riga troviamo le preferenze di ogni guest e su ogni colonna l'hotel di riferimento. Da notare che alcuni guest hanno due preferenze sullo stesso hotel. Con `aggfunc="min"` si è scelto di selezionare il valore minore.  Con la funzione  `df.rank(axis = 1)` si vengono a colmare eventuali "salti" nell'ordinamento delle preferenze per riga (es. se `pref=<1,2,5,6>` allora `rank(pref)=<1,2,3,4>`).
 
 *to_utility_matrix*(`rank_matrix`):
-
-Questa funzione trasforma le preferenze della `rank_matrix` in un valore-utilità per ogni guest. Mantenendo le dimensioni della `rank_matrix`, su ogni riga attribuiamo un valore-utilità 1 alla prima scelta e 0.1 all'ultima scelta. Le preferenze intermedie vengono distribuite con una distanza uniforme tra 1 e 0.1. Gli hotel senza preferenza per un determinato guest avranno un valore-utilità di 0.
+ Questa funzione trasforma le preferenze della `rank_matrix` in un valore-utilità per ogni guest. Mantenendo le dimensioni della `rank_matrix`, su ogni riga attribuiamo un valore-utilità 1 alla prima scelta e 0.1 all'ultima scelta. Le preferenze intermedie vengono distribuite con una distanza uniforme tra 1 e 0.1. Gli hotel senza preferenza per un determinato guest avranno un valore-utilità di 0.
 
 *results*(`choice_matrix`, `vec_prices`, `vec_discount`, `utility_matrix`):
-
-La funzione ritorna una lista con 5 valori:
+ La funzione ritorna una lista con 5 valori:
   *guest_placed (la somma del risultato della somma per riga della `choice_matrix`)
   *rooms_occupied (la somma del risultato della somma per colonna della `choice_matrix`)
   *hotels_occupied (la somma delle colonne della `choice_matrix` la cui somma dei valori è maggiore di 1)
