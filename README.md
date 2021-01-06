@@ -1,5 +1,5 @@
 # Pt.2 Sogni d'Oro
-Final project for programming with Python by Bichi Tommaso, Ciobica Oana Mari, Gessner Voltolina Lorenzo
+Final project for programming with Python by Bichi Tommaso, Ciobica Oana Maria, Gessner Voltolina Lorenzo
 
 ### INTRODUZIONE e APPROCCIO GENERALE
 
