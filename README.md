@@ -41,9 +41,11 @@ Dopo l'import dei dati:
 `rank_matrix`: dai dati in *preferences.xlsx*, viene creato una matrice dove su ogni riga troviamo le preferenze di ogni guest e su ogni colonna l'hotel di riferimento. Da notare che alcuni guest hanno due preferenze sullo stesso hotel. Con `aggfunc="min"` si è scelto di selezionare il valore minore.  Con la funzione  `df.rank(axis = 1)` si vengono a colmare eventuali "salti" nell'ordinamento delle preferenze per riga (es. se `pref=<1,2,5,6>` allora `rank(pref)=<1,2,3,4>`).
 
 *to_utility_matrix*(`rank_matrix`):
+
 Questa funzione trasforma le preferenze della `rank_matrix` in un valore-utilità per ogni guest. Mantenendo le dimensioni della `rank_matrix`, su ogni riga attribuiamo un valore-utilità 1 alla prima scelta e 0.1 all'ultima scelta. Le preferenze intermedie vengono distribuite con una distanza uniforme tra 1 e 0.1. Gli hotel senza preferenza per un determinato guest avranno un valore-utilità di 0.
 
-*results*(`choice_matrix`, `vec_prices`, `vec_discount`, `utility_matrix`) 
+*results*(`choice_matrix`, `vec_prices`, `vec_discount`, `utility_matrix`):
+
 La funzione ritorna una lista con 5 valori:
   *guest_placed (la somma del risultato della somma per riga della `choice_matrix`)
   *rooms_occupied (la somma del risultato della somma per colonna della `choice_matrix`)
@@ -51,17 +53,21 @@ La funzione ritorna una lista con 5 valori:
   *revenue (il volume com plessivo d'affari, calcolato moltiplicando choice_matrix per vec_prices e vec_discount e poi sommando i valori)
   *utility (il grado di soddisfazione complessivo, ricavato dalla somma dei valori ottenuti moltiplicando choice_matrix per utility_matrix)
 
-*random_model*(`hotels`, `rank_matrix`, `t`)
+*random_model*(`hotels`, `rank_matrix`, `t`):
+
 Dal DataFrame `hotels` viene creato un vettore `vec_rooms` che corrisponde all'indice di ogni hotel ripetuto per il numero delle sue camere.
 Trattandosi di una funzione random, i risultati possono variare sensibilmente tra un campionamento e l'altro. Sarà quindi necessario ripetere l'operazione `t` volte,  e calcolare la media dei risultati di tutte le iterazioni. In ogni iterazione viene creata una nuova `choice_matrix` estraendo un random sample `np.random.choice()` da `vec_rooms` di dimensione pari minimo tra il numero di clienti e il numero di camere. Ad ogni guest verrà associata una camera dove l'indice del guest è uguale all'indice del `vec_rooms` e l'indice dell'hotel è pari al valore di `vec_rooms`. Per ogni iterazione la `choice_matrix` passerà attraverso la funzione *results* ed i rusultati sono appesi. La funzione restituisce una matrice `t`x5, dove `t` è il numero di iterazioni.
 
-*preference_model*(`hotels`, `rank_matrix`) 
+*preference_model*(`hotels`, `rank_matrix`):
+
 In questa funzione viene inizializzata la `choice_matrix` con `np.zeros(rank_matrix.shape)` ed un vettore con il numero di camere `rooms`. Ogni vettore riga (corrispondente alle preferenze di un guest) della `rank_matrix` viene moltiplicato per un vettore con valori binari {0,1} dove `rooms` è uguale a 1 dove è presente almeno una camera disponibile. In questo modo le preferenze del guest vengono azzerate per quegli hotel che hanno esaurito le camere. La scelta del cliente viene selezionata prendendo l'indice dove è presente il valore minore diverso da zero. La scelta di ogni guest è registrata nella `choice_matrix` che infine viene passata attraverso la funzione *results* .
 
-*room_model*(`hotels`, `rank_matrix`) 
+*room_model*(`hotels`, `rank_matrix`):
+
 Il DataFrame creato dalla trasposta di `rank_matrix` (`rank_matrix.T`) è ordinato prima in base al numero di `rooms` (dall'hotel più capiente a quello con meno camere) ed in subordine dal `price` prezzo decrescente. Ogni riga di questo DataFrame (corrispondente a tutte le preferenze per un hotel) viene ordinato usando la preferenza del cliente (valore di riga) ed in subordine l'indice del valore (corrispondente all'ordine di prenotazione dei guest). Dalla riga vengono selezionati un numero di valori fino ad un massimo uguale al numero di camere disponibili per l'hotel onsiderato. I risultati vengono inseriti nella `choice_matrix` e le colonne corrispondenti ai guest selezionati vengono riempite da `np.nan` per essere esclusi dai successivi hotel.
 
-*price_model*(`hotels`, `rank_matrix`)
+*price_model*(`hotels`, `rank_matrix`):
+
 La procedura è del tutto identica a *room_model* tranne che il dataframe iniziale che viene ordinato prima per ordine di prezzo (dal più economico al più caro) e poi per numero di camere.
 
 
