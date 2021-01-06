@@ -27,7 +27,8 @@ Per tutte e quattro le strategie si è scelto di partire dalla matrice `rank_mat
   * il numero di clienti sistemati
   * il numero di stanze occupate
   * il numero di hotel diversi occupati
-  * il volume complessivo di affari e il grado di soddisfazione dei clienti
+  * il volume complessivo di affari
+  * il grado di soddisfazione dei clienti
 
 ### SVOLGIMENTO
 
