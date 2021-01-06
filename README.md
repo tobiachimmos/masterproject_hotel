@@ -46,6 +46,7 @@ Dopo l'import dei dati:
 
 *results*(`choice_matrix`, `vec_prices`, `vec_discount`, `utility_matrix`):
  La funzione ritorna una lista con 5 valori:
+ 
   *guest_placed (la somma del risultato della somma per riga della `choice_matrix`)
   *rooms_occupied (la somma del risultato della somma per colonna della `choice_matrix`)
   *hotels_occupied (la somma delle colonne della `choice_matrix` la cui somma dei valori è maggiore di 1)
