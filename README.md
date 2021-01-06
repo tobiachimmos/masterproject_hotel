@@ -1,5 +1,5 @@
 # masterproject_hotel
-Final project (**Pt.2 Sogni d'Oro**) for programming with python by Bichi Tommaso, Ciobica Oana Mari, Gessner Voltolina Lorenzo
+Final project (**Pt.2 Sogni d'Oro**) for programming with Python by Bichi Tommaso, Ciobica Oana Mari, Gessner Voltolina Lorenzo
 
 ### INTRODUZIONE e APPROCCIO GENERALE
 
