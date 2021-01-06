@@ -51,6 +51,6 @@ room_model: funzione che prende due argomenti: hotels (DF di hotels.xlsx) e rank
 price_model: la procedura è del tutto identica a room_model tranne che per il DF iniziale che viene ordinato prima per ordine di prezzo (dal più economico al più caro) e poi per numero di camere.
 
 CONCLUSIONE e GRAFICI
-trallala
+
 
 
